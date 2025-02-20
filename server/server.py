@@ -76,6 +76,10 @@ class Server:
 						print(f"Setting winch speed: {winch_speed}")
 						#todo  make modular
 
+					elif "stop" in command:
+						motor.stop_step()
+						print("stopping motor")
+
 					client_socket.sendall("OK".encode("utf-8"))
 
 				except json.JSONDecodeError:
