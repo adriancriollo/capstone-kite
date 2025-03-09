@@ -4,17 +4,14 @@ import threading
 import time
 
 from server import Server
-
-#control module 
-
-
-
+import sensors2
 
 
 #server module
 '''
 as of now this will be its own daemon to ensure that connection is stable,
-and is consistently receiving control.
+and is consistently receiving control. The server is also directly controlling
+the motor. 
 '''
 
 def daemon_serv():
@@ -25,13 +22,19 @@ def daemon_serv():
 
 #data module
 
-
+#spawns a thread to run the sensor main. Will need better integration
+def daemon_data():
+	sensors2.main()
 
 
 #main loop sequence
 server_thread = threading.Thread(target=daemon_serv, daemon=True)
 
 server_thread.start()
+
+data_thread = threading.Thread(target=daemon_data, daemon=True)
+
+data_thread.start()
 
 
 #keeps main thread up, need a robust solution at some point
