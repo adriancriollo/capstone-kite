@@ -15,8 +15,8 @@ class Server:
 	def store_msg(msg):
 		msg_buf = msg
 
-	def read_msg():
-		return msg_buf
+	def read_msg(self):
+		return self.msg_buf
 
 	def init_server(self):
 
